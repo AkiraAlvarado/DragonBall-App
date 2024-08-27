@@ -1,5 +1,4 @@
 import MainNav from "../molecules/MainNav";
-
 export const MainHeader = () => {
   return (
    <div className="mainHeader-container">

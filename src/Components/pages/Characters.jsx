@@ -33,7 +33,7 @@ const Characters = () => {
                setClas(false);
             }
          } catch (error) {
-            console.error("Error fetching characters:", error);
+            console.error("Error fetching characters:", error); 
          }
       };
       fetchCharacters();

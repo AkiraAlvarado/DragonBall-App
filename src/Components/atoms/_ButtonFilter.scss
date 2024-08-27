@@ -1,0 +1,33 @@
+.custom-select-wrapper {
+   display: flex;
+   flex-direction: column;
+   font-family: Arial, sans-serif;
+   color: white;
+   flex: 1;
+ }
+ 
+ .custom-label {
+   margin-bottom: 2px;
+   font-size: 14px;
+   color: #e4e5ec; // Azul claro
+ }
+ 
+ .custom-select {
+   padding: 8px 12px;
+   font-size: var(--medium-font-size);
+   color: white;
+   background-color: #424242; // Gris oscuro
+   border: 1px solid #000000; // Borde azul claro
+   border-radius: $border-s-radius;
+   padding: 1rem;
+   cursor: pointer;
+ 
+   &:focus {
+     outline: none;
+     border-color: #d5d8e7; // Cambia el color del borde al enfocar
+   }
+ 
+   &:hover {
+     border-color: hsl(240, 1%, 75%); // Cambia el color del borde al pasar el ratón
+   }
+ }

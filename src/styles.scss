@@ -1,0 +1,12 @@
+@import "./Components/SCSS/config/mixin";
+@import "./Components/SCSS/config/variables";
+@import "./Components/SCSS/config/layout";
+@import "./Components/SCSS/base/base";
+@import "./Components/molecules/MainNav";
+@import "./Components/organisms/MainHeader";
+@import "./Components/atoms/ButtonEstandar.scss";
+@import "./Components/atoms/InputSearch.scss";
+@import "./Components/pages/Characters";
+@import "./Components/pages/Planets";
+@import "./Components/atoms/ButtonFilter";
+@import "./Components/molecules/CardCharacter";

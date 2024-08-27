@@ -1,0 +1,56 @@
+.filterSection{
+   display: flex;
+   align-items: end;
+   gap: 1rem ;
+   width: 100%;
+   flex-direction: column;
+
+   @include from(s) {
+      flex-direction: row;
+   }
+   &__button{
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      width: 100%;
+      @include from(s) {
+         width: auto;
+      }
+   }
+   &__input{
+      display: flex;
+      width: 100%;
+      align-items: end;
+      gap: 1rem;
+   }
+}
+
+.cardSection{
+   display: grid;
+   grid-template-columns: repeat(2,1fr);
+   gap: 2em;
+   @include from(s) {
+      grid-template-columns: repeat(3,1fr);
+   }
+   @include from(ll) {
+      grid-template-columns: repeat(5,1fr);
+   }
+}
+
+.buttonSection{
+   display: flex;
+   justify-content: center;
+   gap: 1rem;
+   margin-bottom: 1rem;
+}
+
+.gridTrue{
+   grid-template-columns: repeat(1,1fr);
+
+   @include from(s) {
+      grid-template-columns: repeat(2,1fr);
+   }
+   @include from(ll) {
+      grid-template-columns: repeat(3,1fr);
+   }
+}

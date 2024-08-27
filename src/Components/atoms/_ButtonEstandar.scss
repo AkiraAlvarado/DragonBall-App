@@ -1,0 +1,16 @@
+.button {
+   display: inline-flex;
+   gap: 0.5em;
+   align-items: center;
+   justify-content: center;
+   background-color: var(--orange-500);
+   font-size: var(--medium-font-size);
+   padding: 1em 1.5em;
+   border-radius: $border-l-radius; 
+   cursor: pointer;
+}
+
+.button.disabled {
+   background-color: #f8b18d; /* Color para botones desactivados */
+   cursor: not-allowed; /* Cambiar el cursor para mostrar que no se puede hacer clic */
+}

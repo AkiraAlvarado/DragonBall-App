@@ -1,0 +1,8 @@
+.mainNav{
+   display: flex;
+   gap: 1rem;
+   font-size: var(--item-s-font-size) ;
+   &__item{
+      color: white;
+   }
+}

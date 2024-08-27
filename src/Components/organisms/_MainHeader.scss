@@ -1,0 +1,15 @@
+.mainHeader-container{
+   background-color: var(--black-800) !important; 
+}
+.mainHeader{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   max-width: $max-witdh;
+   margin: 0 auto;
+   height: 5rem;
+}
+
+.logo{
+   width: 200px;
+}

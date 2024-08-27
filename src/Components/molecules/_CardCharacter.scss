@@ -1,0 +1,64 @@
+.card-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start; // Alinea los elementos al inicio para evitar espacios
+   background-color: #333;
+   border-radius: $border-l-radius;
+   overflow: hidden;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ 
+   &__image {
+     background: radial-gradient(66.3% 50% at 50% 50%, #FCBD8D 0%, #EE7337 100%);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     height: 220px; // Puedes ajustar esta altura según sea necesario
+     overflow: hidden; // Asegura que las imágenes no se salgan del contenedor
+     @include from(s) {
+      height: 350px;
+      }
+   }
+ 
+   &__info {
+     padding: 1em;
+     background-color: var(--black-500);
+     color: var(--white-100);
+     text-align: center;
+     display: flex;
+     flex-direction: column;
+     gap: 0.75em;
+   }
+ }
+ 
+ .card {
+   &__image {
+     width: auto;
+     height: 100%;
+     object-fit: contain;
+     padding: 0.5em;
+   }
+ 
+   &__name {
+     font-size: var(--large-font-size);
+     font-weight: bold;
+
+   }
+ 
+   &__ki {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin: 0.25rem 0;
+   }
+   &__number__ki{
+      background-color: var(--yellow-500);
+      font-size: var(--small-font-size);
+      font-weight: bold;
+      border-radius: $border-s-radius;
+      padding: 0.5em;
+   }
+   &__name__ki{
+      font-size: var(--medium-font-size);
+      font-weight: bold;
+   }
+ }

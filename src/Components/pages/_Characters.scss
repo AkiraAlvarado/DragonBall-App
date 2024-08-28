@@ -26,15 +26,12 @@
 }
 
 .cardSection{
+   
+   --min: 25ch;
    display: grid;
-   grid-template-columns: repeat(2,1fr);
    gap: 2em;
-   @include from(s) {
-      grid-template-columns: repeat(3,1fr);
-   }
-   @include from(ll) {
-      grid-template-columns: repeat(5,1fr);
-   }
+   grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
+
 }
 
 .buttonSection{

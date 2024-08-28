@@ -1,7 +1,8 @@
 
-const CardCharacter = ({character}) => {
+const CardCharacter = ({character, onclick}) => {
   return (
-    <div className="card-container">
+
+    <div className="card-container" onClick={onclick}>
       <div className="card-container__image">
          <img className="card__image" src={character.image} alt="" />
       </div>

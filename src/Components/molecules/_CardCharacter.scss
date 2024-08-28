@@ -12,7 +12,7 @@
      display: flex;
      align-items: center;
      justify-content: center;
-     height: 220px; // Puedes ajustar esta altura según sea necesario
+     height: 250px; // Puedes ajustar esta altura según sea necesario
      overflow: hidden; // Asegura que las imágenes no se salgan del contenedor
      @include from(s) {
       height: 350px;

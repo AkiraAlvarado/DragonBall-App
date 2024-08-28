@@ -1,0 +1,26 @@
+.mainInfo{
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 100;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100vw;
+   height: 100vh;
+   background-color: rgba(0, 0, 0, 0.5); /* Fondo negro con opacidad */
+}
+.mainInfo-container{
+   background-color: var(--black-500);
+   border-radius: $border-l-radius;
+   width: 200px;
+   height: 200px;
+
+}
+.show{
+   display: flex;
+   
+}
+.ocult{
+   display: none;
+}

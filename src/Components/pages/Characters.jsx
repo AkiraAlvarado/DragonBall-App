@@ -1,96 +1,71 @@
-import { API_URL } from "../../../env";
-import ButtonFilter from "../atoms/ButtonFilter";
-import InputSearch from "../atoms/InputSearch";
-import { useState, useEffect, useRef } from "react";
-import axios from "axios";
+import { useState, useRef } from "react";
 import CardCharacter from "../molecules/CardCharacter";
-import ButtonEstandar from "../atoms/ButtonEstandar";
+import CharacterInfo from "../molecules/CharacterInfo";
+import FilterButtons from "./FilterButtons";
+import InputSearch from "../atoms/InputSearch";
+import PaginationButtons from "../organisms/PaginationButtons";
+import useInformation from "../../../hook.js/useInformation";
+
 const Characters = () => {
-   const [characters, setCharacters] = useState([]); // Renombrado para indicar que es un array
-   const [page, setPage] = useState(1);
-   const [totalPages, setTotalPages] = useState(1); // Nuevo estado para manejar el total de páginas
-   const [query, setQuery] = useState("")
-   const [clas, setClas] = useState(false)
-   const [raza, setRaza] = useState("")
-   const [genre, setGenre] = useState("")
-   const inputRef = useRef(null);
+  const [query, setQuery] = useState("");
+  const [raza, setRaza] = useState("");
+  const [genre, setGenre] = useState("");
+  const [info, setInfo] = useState({}); // Cambiamos el estado a un objeto para manejar múltiples personajes
+  const inputRef = useRef(null);
+  const [page, setPage] = useState("");
 
-   useEffect(() => {
-      const fetchCharacters = async () => {
-         try {
-            let url = `${API_URL}/characters`;
-            let params = { page: page };
-            if (query) params.name = query; // Add query to params if present
-            if (raza) params.race = raza
-            if (genre) params.gender = genre
+  const endpoint = `/characters`;
+  const characters = useInformation({ endpoint, genre, race: raza, query, page });
 
-            const response = await axios.get(url, { params });
-            setCharacters(response.data.items || response.data); // Asegúrate de que `items` existe o usa `response.data` directamente
-            setClas(true);
-            console.log(response)
-            if (!query && !raza) {
-               setTotalPages(response.data.meta.totalPages); // Solo actualizar totalPages si no hay filtros
-               setClas(false);
-            }
-         } catch (error) {
-            console.error("Error fetching characters:", error); 
-         }
-      };
-      fetchCharacters();
-   }, [page, query, raza, genre]); // Fetch characters whenever page, query, or raza changes
+  const handleSearch = (event) => {
+    setQuery(event.target.value); // Actualiza el estado del query con el valor del input
+  };
 
-   const handleNextPage = () => {
-      if (page < totalPages) setPage(prevPage => prevPage + 1); // Incrementar la página si no estamos en la última
-   };
+  const handleInfoToggle = (id) => {
+    setInfo((prevInfo) => ({
+      ...prevInfo,
+      [id]: !prevInfo[id] // Cambia el estado para el personaje con el id específico
+    }));
+  };
 
-   const handleSelect = (value) => {
-      if (value === "") {
-         setRaza(""); // Restablecer el filtro de raza cuando se selecciona "Todos"
-      } else {
-         setRaza(value);
-      }
-   };
-
-   const handleSelect2 = (value) => {
-      if (value === "") {
-         setGenre(""); // Restablecer el filtro de raza cuando se selecciona "Todos"
-      } else {
-         setGenre(value);
-      }
-   };
-
-   const handlePrevPage = () => {
-      if (page > 1) setPage(prevPage => prevPage - 1); // Decrementar si no estamos en la primera página 
-   };
-
-   const handleSearch = (event) => {
-      setQuery(event.target.value); // Actualizar el estado 'query' cuando el valor del input cambia
-      console.log(event.target.value);
-   };
-
-   return (
+  return (
+    <>
       <div className="l-container secction__separator">
-         <div className="filterSection">
-            <div className="filterSection__button">
-               <ButtonFilter onSelect={handleSelect} options={['Human', 'Saiyan', 'Namekian', 'Majin', 'Frieza Race', 
-               'God', 'Angel', 'Evil', 'Nucleico', 'Nucleico benigno', 'Android', 'Jiren Race']} />
-               <ButtonFilter onSelect={handleSelect2} options={['Male', 'Female']} />
-            </div>
-            <div className="filterSection__input">
-               <InputSearch ref={inputRef} text={"Busca a tu personaje Favorito"} onChange={handleSearch} />
-            </div>
-         </div>
-         <div className={`cardSection secction__separator ${clas ? 'gridTrue' : ''}`}>
-            {characters && characters.map((char) => (
-               <CardCharacter key={char.id} character={char} />
-            ))}
-         </div>
-         <div className="buttonSection secction__separator">
-            <ButtonEstandar className={`fa-solid fa-arrow-left-long`} text={"Anterior"} onClick={handlePrevPage} disabled={page === 1} />
-            <ButtonEstandar className={`fa-solid fa-arrow-right`} text={"Siguiente"} onClick={handleNextPage} disabled={page === totalPages}/>
-         </div>
+        <div className="filterSection">
+          <FilterButtons setRaza={setRaza} setGenre={setGenre} />
+          <InputSearch ref={inputRef} text="Search..." onChange={handleSearch} />
+        </div>
+        <div className={`cardSection secction__separator ${query ? 'gridTrue' : ''}`}>
+          {Array.isArray(characters) && characters.length > 0 ? (
+            characters.map((char) => (
+              <CardCharacter
+                key={char.id}
+                character={char}
+                onclick={() => handleInfoToggle(char.id)} // Pasa el id del personaje
+              />
+            ))
+          ) : (
+            <p>No characters found</p>
+          )}
+        </div>
+        <PaginationButtons setPages={setPage} />
       </div>
-   );
+      <div>
+        {Array.isArray(characters) && characters.length > 0 ? (
+          characters.map((char) => (
+            <CharacterInfo
+              key={char.id}
+              information={char}
+              info={info[char.id] || false} // Obtiene el estado de visibilidad del personaje
+              setInfo={() => handleInfoToggle(char.id)} // Cambia el estado de visibilidad del personaje
+            />
+          ))
+        ) : (
+          <p>No characters found</p>
+        )}
+      </div>
+    </>
+  );
 };
 
 export default Characters;

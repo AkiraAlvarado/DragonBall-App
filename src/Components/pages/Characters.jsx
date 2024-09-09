@@ -55,7 +55,8 @@ const Characters = () => {
           characters.map((char) => (
             <CharacterInfo
               key={char.id}
-              information={char}
+              id ={char.id}
+              // Aqui del estado info se accede a la posición en la cual esta guardada el ID 
               info={info[char.id] || false} // Obtiene el estado de visibilidad del personaje
               setInfo={() => handleInfoToggle(char.id)} // Cambia el estado de visibilidad del personaje
             />
